@@ -22,7 +22,7 @@ export interface Env {
     // MY_SERVICE: Fetcher;
 }
 
-const GIFFLE_DOMAIN = "https://giffle.ty.pizza"
+const GIFFLE_DOMAIN = "https://giffle.tynatsuhara.workers.dev"
 
 const DEFAULT_URL = new URL("https://i.giphy.com/media/TO8WGuVadRniy794oY/giphy.webp")
 

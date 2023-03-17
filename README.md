@@ -6,7 +6,7 @@ Requests are proxied to the image host and returned with `no-cache` headers to e
 
 ## usage
 
-The giffle API is hosted at `https://giffle.ty.pizza`.
+The giffle API is deployed as a Cloudflare worker at `https://giffle.tynatsuhara.workers.dev`
 
 The `options` query parameter is used to specify a comma-separated list of URLs. One of these image URLs will be chosen at random and proxied.
 
@@ -18,18 +18,18 @@ params.set("options", [
     "https://i.giphy.com/media/TO8WGuVadRniy794oY/giphy.webp",
 ])
 
-console.log("https://giffle.ty.pizza/?" + params.toString())
-// https://giffle.ty.pizza/?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp
+console.log("https://giffle.tynatsuhara.workers.dev/?" + params.toString())
+// https://giffle.tynatsuhara.workers.dev/?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp
 ```
 
 ## example
 
 ```markdown
-<img src="https://giffle.ty.pizza?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp">
+<img src="https://giffle.tynatsuhara.workers.dev/?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp">
 ```
 
-<img src="https://giffle.ty.pizza?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp">
+<img src="https://giffle.tynatsuhara.workers.dev/?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp">
 
 ## limitations
 
-GitHub caches all images in markdown files using [camo](https://github.com/atmos/camo). Even with proper cache-busting headers, images still get cached for a few minutes. I've tried to make it so that the worker purges the GitHub cache after returning the response, but have not had any luck getting this to work consistently :(
+GitHub caches all images in markdown files using [camo](https://github.com/atmos/camo). Even with proper cache-busting headers, images still get cached for a few minutes. I've tried to make it so that the worker purges the GitHub cache after returning the response, but have not had any luck getting this to work consistently ¯\_(ツ)\_/¯
