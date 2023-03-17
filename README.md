@@ -4,9 +4,9 @@
 Useful for embedding random images in contexts that don't support scripting, such as markdown files like this one!
 Requests are proxied to the image host and returned with `no-cache` headers to ensure a random selection on a refresh.
 
-`
-
 ## usage
+
+The giffle API is hosted at `https://giffle.ty.pizza`.
 
 The `options` query parameter is used to specify a comma-separated list of URLs. One of these image URLs will be chosen at random and proxied.
 
@@ -18,8 +18,8 @@ params.set("options", [
     "https://i.giphy.com/media/TO8WGuVadRniy794oY/giphy.webp",
 ])
 
-console.log(params.toString())
-// options=https%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp
+console.log("https://giffle.ty.pizza/?" + params.toString())
+// https://giffle.ty.pizza/?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp
 ```
 
 
