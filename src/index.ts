@@ -25,6 +25,7 @@ export interface Env {
 const DEFAULT_URL = new URL("https://i.giphy.com/media/TO8WGuVadRniy794oY/giphy.webp")
 
 const RESPONSE_HEADERS = {
+    Expires: "Mon, 01 Jan 1990 00:00:00 GMT",
     "Cache-Control": "no-cache",
     "access-control-allow-origin": "*",
     "cross-origin-resource-policy": "cross-origin",

@@ -19,6 +19,7 @@ describe("Worker", () => {
         const resp = await worker.fetch()
         if (resp) {
             expect(resp.headers.get("Cache-Control")).toBe("no-cache")
+            expect(resp.headers.get("Expires")).toBe("Mon, 01 Jan 1990 00:00:00 GMT")
         }
     })
 
