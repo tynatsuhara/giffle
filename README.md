@@ -4,9 +4,11 @@
 Useful for embedding random images in contexts that don't support scripting, such as markdown files like this one!
 Requests are proxied to the image host and returned with `no-cache` headers to ensure a random selection on a refresh.
 
+`
+
 ## usage
 
-The `options`
+The `options` query parameter is used to specify a comma-separated list of URLs. One of these image URLs will be chosen at random and proxied.
 
 ```javascript
 const params = new URLSearchParams()
@@ -20,6 +22,7 @@ console.log(params.toString())
 // options=https%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp
 ```
 
+
 ## example
 
 ```markdown
@@ -27,3 +30,8 @@ console.log(params.toString())
 ```
 
 <img src="https://giffle.ty.pizza?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp">
+
+
+## limitations
+
+GitHub caches all images in markdown files using [camo](https://github.com/atmos/camo). Even with proper cache-busting headers, images still get cached for a short period of time.
