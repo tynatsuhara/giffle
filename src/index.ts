@@ -36,12 +36,11 @@ const RESPONSE_HEADERS = {
 export default {
     async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
         const params = getUrlParams(request)
-
-        await maybeBustGithubCache(params)
-
         const url = getUrlFromRequest(params)
         const headers = Object.fromEntries(request.headers.entries())
         const response = await fetch(url, { headers })
+
+        maybeBustGithubCache(params, ctx)
 
         return new Response(response.body, {
             headers: {
@@ -52,11 +51,22 @@ export default {
     },
 }
 
-const maybeBustGithubCache = async (params: URLSearchParams) => {
+// unfortunately, this doesn't seem to work very well
+const maybeBustGithubCache = async (params: URLSearchParams, ctx: ExecutionContext) => {
     const bustUrl = params.get("bust_github_cache")
     if (!bustUrl) {
         return
     }
+
+    const bustCacheAfterWait = async () => {
+        await new Promise<void>((resolve) => setTimeout(resolve, 3_000))
+        await bustGithubCache(bustUrl)
+    }
+
+    ctx.waitUntil(bustCacheAfterWait())
+}
+
+const bustGithubCache = async (bustUrl: string) => {
     const response = await fetch(bustUrl)
     const html = await response.text()
 
@@ -84,6 +94,7 @@ const maybeBustGithubCache = async (params: URLSearchParams) => {
     }
 
     console.log(`purging ${camoUrls.length} URLs from ${bustUrl}`)
+    console.log(`purging ${camoUrls}`)
 
     await Promise.all(
         camoUrls.map((url) => {

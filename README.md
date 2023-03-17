@@ -22,7 +22,6 @@ console.log("https://giffle.ty.pizza/?" + params.toString())
 // https://giffle.ty.pizza/?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp
 ```
 
-
 ## example
 
 ```markdown
@@ -31,7 +30,6 @@ console.log("https://giffle.ty.pizza/?" + params.toString())
 
 <img src="https://giffle.ty.pizza?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp">
 
-
 ## limitations
 
-GitHub caches all images in markdown files using [camo](https://github.com/atmos/camo). Even with proper cache-busting headers, images still get cached for a few minutes.
+GitHub caches all images in markdown files using [camo](https://github.com/atmos/camo). Even with proper cache-busting headers, images still get cached for a few minutes. I've tried to make it so that the worker purges the GitHub cache after returning the response, but have not had any luck getting this to work consistently :(
