@@ -23,7 +23,7 @@ console.log(params.toString())
 ## example
 
 ```markdown
-<img src="https://giffle.ty.pizza/options=https%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp">
+<img src="https://giffle.ty.pizza?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp">
 ```
 
-<img src="https://giffle.ty.pizza/options=https%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp">
+<img src="https://giffle.ty.pizza?options=https%3A%2F%2Fi.giphy.com%2Fmedia%2Fc7seQb6ViPLoS0T6oK%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FbpYXSdwzUhAkbrtUDd%2Fgiphy.webp%2Chttps%3A%2F%2Fi.giphy.com%2Fmedia%2FTO8WGuVadRniy794oY%2Fgiphy.webp">
