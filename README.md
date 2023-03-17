@@ -34,4 +34,4 @@ console.log("https://giffle.ty.pizza/?" + params.toString())
 
 ## limitations
 
-GitHub caches all images in markdown files using [camo](https://github.com/atmos/camo). Even with proper cache-busting headers, images still get cached for a short period of time.
+GitHub caches all images in markdown files using [camo](https://github.com/atmos/camo). Even with proper cache-busting headers, images still get cached for a few minutes.
