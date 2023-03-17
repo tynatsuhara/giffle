@@ -32,4 +32,4 @@ console.log("https://giffle.tynatsuhara.workers.dev/?" + params.toString())
 
 ## limitations
 
-GitHub caches all images in markdown files using [camo](https://github.com/atmos/camo). Even with proper cache-busting headers, images still get cached for a few minutes. I've tried to make it so that the worker purges the GitHub cache after returning the response, but have not had any luck getting this to work consistently ¯\_(ツ)\_/¯
+GitHub caches all images in markdown files using [camo](https://github.com/atmos/camo). Even with proper cache-busting headers, images still get cached for a few minutes. I've tried to make it so that the worker purges the GitHub cache after returning the response, but have not had any luck getting this to work consistently ¯\\_(ツ)\_/¯
