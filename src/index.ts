@@ -22,6 +22,8 @@ export interface Env {
     // MY_SERVICE: Fetcher;
 }
 
+const GIFFLE_DOMAIN = "https://giffle.ty.pizza"
+
 const DEFAULT_URL = new URL("https://i.giphy.com/media/TO8WGuVadRniy794oY/giphy.webp")
 
 const RESPONSE_HEADERS = {
@@ -33,9 +35,14 @@ const RESPONSE_HEADERS = {
 
 export default {
     async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-        const url = getUrlFromRequest(request)
+        const params = getUrlParams(request)
+
+        await maybeBustGithubCache(params)
+
+        const url = getUrlFromRequest(params)
         const headers = Object.fromEntries(request.headers.entries())
         const response = await fetch(url, { headers })
+
         return new Response(response.body, {
             headers: {
                 ...RESPONSE_HEADERS,
@@ -45,13 +52,55 @@ export default {
     },
 }
 
-const getUrlFromRequest = (request: Request): URL => {
-    const qsIndex = request.url.indexOf("?")
-    if (qsIndex === -1) {
-        return DEFAULT_URL
+const maybeBustGithubCache = async (params: URLSearchParams) => {
+    const bustUrl = params.get("bust_github_cache")
+    if (!bustUrl) {
+        return
+    }
+    const response = await fetch(bustUrl)
+    const html = await response.text()
+
+    const camoUrls = []
+
+    for (let startIndex = 0; startIndex !== -1; ) {
+        const imgSrcPrefix = `<img src="`
+        const imgStart = html.indexOf(
+            `${imgSrcPrefix}https://camo.githubusercontent.com/`,
+            startIndex
+        )
+        if (imgStart === -1) {
+            break
+        }
+        const srcPrefix = `data-canonical-src="`
+        const srcStart = html.indexOf(srcPrefix, imgStart) + srcPrefix.length
+        const srcEnd = html.indexOf(`"`, srcStart)
+        const canonicalSrc = html.substring(srcStart, srcEnd)
+        if (canonicalSrc.startsWith(GIFFLE_DOMAIN)) {
+            const camoSrcEnd = html.indexOf(`"`, imgStart + imgSrcPrefix.length)
+            const camoSrc = html.substring(imgStart + imgSrcPrefix.length, camoSrcEnd)
+            camoUrls.push(camoSrc)
+        }
+        startIndex = srcEnd
     }
 
-    const params = new URLSearchParams(request.url.substring(qsIndex + 1))
+    console.log(`purging ${camoUrls.length} URLs from ${bustUrl}`)
+
+    await Promise.all(
+        camoUrls.map((url) => {
+            return fetch(url, { method: "PURGE" })
+        })
+    )
+}
+
+const getUrlParams = (request: Request) => {
+    const qsIndex = request.url.indexOf("?")
+    if (qsIndex === -1) {
+        return new URLSearchParams()
+    }
+    return new URLSearchParams(request.url.substring(qsIndex + 1))
+}
+
+const getUrlFromRequest = (params: URLSearchParams): URL => {
     const options = params.get("options")?.split(",")
     if (!options?.length) {
         return DEFAULT_URL
