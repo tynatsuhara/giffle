@@ -35,7 +35,12 @@ export default {
         const url = getUrlFromRequest(request)
         const headers = Object.fromEntries(request.headers.entries())
         const response = await fetch(url, { headers })
-        return new Response(response.body, { headers: RESPONSE_HEADERS })
+        return new Response(response.body, {
+            headers: {
+                ...RESPONSE_HEADERS,
+                ["Content-Type"]: response.headers.get("Content-Type") ?? "image/gif",
+            },
+        })
     },
 }
 

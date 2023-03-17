@@ -21,4 +21,11 @@ describe("Worker", () => {
             expect(resp.headers.get("Cache-Control")).toBe("no-cache")
         }
     })
+
+    it("sets Content-Type", async () => {
+        const resp = await worker.fetch()
+        if (resp) {
+            expect(resp.headers.get("Content-Type")).toBe("image/webp")
+        }
+    })
 })
